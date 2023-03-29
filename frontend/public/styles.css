@@ -1,0 +1,94 @@
+body{
+    background-color: #ecf2ff;
+    
+}
+
+.centre{
+    margin:0 8%;
+  font-family: 'Montserrat', sans-serif;
+    font-size: 1.6rem;
+    line-height: 1.6;
+    font-weight: 400;
+}
+
+/* Navigation bar */
+.nav{
+    margin-top:1%;
+}
+.brand{
+    margin-right: 64%;
+    margin-top: 1%;
+}
+.but{
+    font-size: 1.55rem;
+    margin-right: 0;
+}
+.but-right{
+    margin-left:1.5%;
+}
+
+.but:hover{
+    color:white;
+    background-color: #1d0443;
+}
+
+
+
+
+
+/* Heading */
+.heading{
+    text-align: center;
+    font-size: 58px;
+    font-weight: 700;
+    width: 59%;
+    
+}
+.first{
+    position:absolute;
+    top:35%;
+    margin:0;
+}
+.second{
+    position:absolute;
+    top:140%;
+    
+}
+.third{
+    position:absolute;
+    top:86%;
+    left:55%;
+    
+}
+.fourth{
+    position:absolute;
+    top:173%;
+    left:45%;
+}
+
+
+
+/* Loader */
+
+.loader-css{
+    
+    
+    display: block;
+    border-top: #1d0443;
+    border-color:#1d0443;
+    border-radius: 50%;
+    width: 50px;
+}
+
+/* Product */
+
+.product{
+    /* display: flex; */
+    margin:0 8%;
+    margin-top: 15%;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1.6rem;
+    line-height: 1.6;
+    font-weight: 400;
+    display: inline-block;
+}
