@@ -33,6 +33,7 @@ const userSchema = new mongoose.Schema({
     username: String,
     password: String,
     name: String,
+    profileImageUrl: String,
     product: [{
         bookName: String,
         price: String,
@@ -60,7 +61,8 @@ app.post("/signupBackend", (req, res) => {
     const user = new User({
         username: req.body.username,
         password: req.body.password,
-        name: req.body.name
+        name: req.body.name,
+        profileImageUrl: req.body.profileImageUrl
     });
     user.save().then((result) => {
         return res.status(200).send({

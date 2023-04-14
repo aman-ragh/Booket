@@ -15,6 +15,9 @@ import Loader from "./Loader";
 // import OrganisationRoute from "./OrganisationRoute";
 import Upload from "./Upload";
 import Signup from "./Signup";
+import Signin from "./Signin";
+import Profile from "./Profile";
+
 function App() {
   
   return (
@@ -40,7 +43,9 @@ function App() {
        <Route path="organisationCreate" element={<OrganisationCreate />} />
        </Route> */}
        {/* <Route path="/organisationCreate" element={<OrganisationCreate />} /> */}
+        <Route path="/profile" element={<Profile />} />
        <Route path="/" element={<Home />} />
+       <Route path="/signin" element={<Signin />} />
         <Route path="/loader" element={<Loader />} />
         <Route path="/upload" element={<Upload />} />
         <Route path="/signup" element={<Signup />} />
