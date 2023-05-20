@@ -17,7 +17,8 @@ import Upload from "./Upload";
 import Signup from "./Signup";
 import Signin from "./Signin";
 import Profile from "./Profile";
-
+import Account from "./Account";
+import Book from "./Book";
 function App() {
   
   return (
@@ -49,6 +50,9 @@ function App() {
         <Route path="/loader" element={<Loader />} />
         <Route path="/upload" element={<Upload />} />
         <Route path="/signup" element={<Signup />} />
+        <Route path="/account" element={<Account/>} />
+        <Route path="/book" element={<Book/>} />
+        
        <Route path="*" element={<h1>404 Not Found</h1>} />
       </Routes>
     </div>

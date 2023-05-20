@@ -53,28 +53,33 @@ function Upload() {
     }
 
     return (
-        <div>
+        <div className="container">
             <form method='POST'>
-                <label for="file">Image</label>
-                <input type="file" onChange={(e) => setImage(e.target.files[0])} />
-                <br/>
-                <label for="bookName">Book Name</label>
-                <input type="text" onChange={(e) => setBookName(e.target.value)} />
+            <div className="image-container">
+            
+            <label for="book-image">
+            <img src="https://th.bing.com/th?id=OIP.xwyRkL-vaRx8aUAQP79eXQAAAA&w=219&h=284&c=8&rs=1&qlt=90&o=6&dpr=1.3&pid=3.1&rm=2" alt="book"/>
+            </label>
+            <input type="file" id="book-image" onChange={(e) => setImage(e.target.files[0])} placeholder="Image" hidden />
+                
+            </div>
+            <div className="book-details">
+            <br/>
+                <input type="text" onChange={(e) => setBookName(e.target.value)} placeholder="Name"/>
                 <br/>
                 
-                <label for="">Price</label>
-                <input type="text" onChange={(e) => setPrice(e.target.value)} />
+                <input type="text" onChange={(e) => setPrice(e.target.value)} placeholder="Price" />
                 <br/>
                 
-                <label for="">City</label>
-                <input type="text" onChange={(e) => setCity(e.target.value)} />
+                <input type="text" onChange={(e) => setCity(e.target.value)} placeholder="City" />
                 <br/>
                 
-                <label for="">Mobile Number</label>
-                <input type="text" onChange={(e) => setMobileNumber(e.target.value)} />
+                <input type="text" onChange={(e) => setMobileNumber(e.target.value)} placeholder="Contact No." />
                 <br/>
                 
                 <button onClick={handleSubmit} type="submit">Submit</button>
+            </div>
+               
             </form>
 
         </div>

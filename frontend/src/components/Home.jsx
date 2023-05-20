@@ -24,16 +24,18 @@ function Home() {
       <LocationContext.Provider value={{ loc, setLoc }}>
         <SearchContext.Provider value={{ search, setSearch }}>
           <Navbar />
-          <h1>{loc}</h1>
-          <h1>{search}</h1>
+          <div className="home-products-container">
+            
           {products.map((productt) => {
             const items = productt.product;
             return items.map((item) => {
               return (((search === null || search === "") && item.city.toLowerCase().includes(loc.toLowerCase())) || item.city.toLowerCase().includes(loc.toLowerCase()) && item.bookName.toLowerCase().includes(search.toLowerCase())) ?
-                (<Product bookName={item.bookName} price={item.price} city={item.city} productImageUrl={item.productImageUrl} />) : null;
+                (<Product bookName={item.bookName} price={item.price} city={item.city} productImageUrl={item.productImageUrl} mobileNumber={item.mobileNumber}/>) : null;
             });
           })
           }
+          </div>
+          
         </SearchContext.Provider>
       </LocationContext.Provider>      
     </div>
