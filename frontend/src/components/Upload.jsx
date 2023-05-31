@@ -1,30 +1,42 @@
-import React, { useState } from 'react'
+import React, { useState,useContext,useEffect } from 'react'
 import { storage } from '../firebase'
 import { getDownloadURL, ref, uploadBytes } from 'firebase/storage';
 import { v4 } from 'uuid';
 import axios from 'axios';
+import { AccountContext } from './Contexts/AccountContext';
+import { useNavigate } from 'react-router-dom';
 
 function Upload() {
-    const [image, setImage] = useState(null);
+    const Navigate=useNavigate();
+    const {account}=useContext(AccountContext);
+    const token=localStorage.getItem("token");
+    useEffect(()=>{
+        if(!account || !token){
+            Navigate("/signin");
+        }
+    });
     const [bookName, setBookName] = useState(null);
     const [price, setPrice] = useState(null);
     const [city, setCity] = useState(null);
     const [mobileNumber, setMobileNumber] = useState(null);
-    const uploadImage = async(e) => {
+    const [productImageUrl,setProductImageUrl]=useState("https://th.bing.com/th?id=OIP.xwyRkL-vaRx8aUAQP79eXQAAAA&w=219&h=284&c=8&rs=1&qlt=90&o=6&dpr=1.3&pid=3.1&rm=2");
+    const uploadImage = (e) => {
+        const image=e.target.files[0];
         if (image == null) {
             return alert("Please select an image");
         }
         const storageRef = ref(storage, `productImages/${image.name + v4()}`);
-        const link=await uploadBytes(storageRef, image).then((snapshot) => {
+        const link=uploadBytes(storageRef, image).then((snapshot) => {
             const l= getDownloadURL(snapshot.ref).then((downloadURL) => {
                 // alert("url is "+downloadURL);
                 console.log('File available at', downloadURL);
+                setProductImageUrl(downloadURL);
                 return downloadURL;
             }).catch((error) => {
                 console.log(error);
                 return -1;
             });
-            alert("Image uploaded successfully");
+            // alert("Image uploaded successfully");
             console.log(snapshot);
             return l;
         }).catch((error) => {
@@ -37,15 +49,17 @@ function Upload() {
     const handleSubmit = async(e) => {
         e.preventDefault();
         console.log(bookName);
-        const productImageUrl=await uploadImage();
         console.log("imageUrl",productImageUrl);
-        const username="aman";
-        axios.post("/uploadBackend", { username,bookName, price, city, mobileNumber, productImageUrl })
+        const username=account.username;
+        axios.post("/uploadBackend", { username,bookName, price, city, mobileNumber, productImageUrl },{headers:{Authorization:token}})
             .then((res) => {
                 console.log(res.data);
+                Navigate("/");
             })
             .catch((err) => {
                 console.log(err);
+                alert("Retry, some error occured");
+                Navigate("/upload");
             });
         
         
@@ -58,9 +72,9 @@ function Upload() {
             <div className="image-container">
             
             <label for="book-image">
-            <img src="https://th.bing.com/th?id=OIP.xwyRkL-vaRx8aUAQP79eXQAAAA&w=219&h=284&c=8&rs=1&qlt=90&o=6&dpr=1.3&pid=3.1&rm=2" alt="book"/>
+            <img src={productImageUrl} alt="book"/>
             </label>
-            <input type="file" id="book-image" onChange={(e) => setImage(e.target.files[0])} placeholder="Image" hidden />
+            <input type="file" id="book-image" onChange={uploadImage} placeholder="Image" hidden />
                 
             </div>
             <div className="book-details">

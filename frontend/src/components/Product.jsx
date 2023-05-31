@@ -19,14 +19,10 @@ function Product(props) {
     //   </div>
     // </div>
     <>
-    {/* <NavLink to={{
-      pathname:"/book",
-      state: {mydata:'aman'}
+    <NavLink to="/book" state={{book:props}}
+    className="navlink" >
       
-    }} 
-    className="navlink" > */}
-      
-    <div class="product-container">
+    <div class="product-container" >
       <div class="product-card">
       <div class="product-image">
         <img src={props.productImageUrl} className="" alt="img" />
@@ -39,7 +35,7 @@ function Product(props) {
       </div>
     </div>
     </div>
-    {/* </NavLink> */}
+    </NavLink>
     </>
     
   )

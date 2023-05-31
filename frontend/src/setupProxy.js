@@ -1,34 +1,34 @@
 const { createProxyMiddleware } = require('http-proxy-middleware');
 
 module.exports = function(app) {
-  // app.use(
-  //   "/sendEmailOtp",
-  //   createProxyMiddleware({
-  //     target: 'http://localhost:2000',
-  //     changeOrigin: true,
-  //   })
-  // );
-  // app.use(
-  //   "/sendMobOtp",
-  //   createProxyMiddleware({
-  //     target: 'http://localhost:2000',
-  //     changeOrigin: true,
-  //   })
-  // );
-  // app.use(
-  //   '/userSignup',
-  //   createProxyMiddleware({
-  //     target: 'http://localhost:2000',
-  //     changeOrigin: true,
-  //   })
-  // );
-  // app.use(
-  //   '/userLoginBackend',
-  //   createProxyMiddleware({
-  //     target: 'http://localhost:2000',
-  //     changeOrigin: true,
-  //   })
-  // );
+  app.use(
+    "/sendEmailOtp",
+    createProxyMiddleware({
+      target: 'http://localhost:2000',
+      changeOrigin: true,
+    })
+  );
+  app.use(
+    "/signinCheckBackend",
+    createProxyMiddleware({
+      target: 'http://localhost:2000',
+      changeOrigin: true,
+    })
+  );
+  app.use(
+    '/accountBackend',
+    createProxyMiddleware({
+      target: 'http://localhost:2000',
+      changeOrigin: true,
+    })
+  );
+  app.use(
+    '/signinBackend',
+    createProxyMiddleware({
+      target: 'http://localhost:2000',
+      changeOrigin: true,
+    })
+  );
   // app.use(
   //   '/userWelcomeBackend',
   //   createProxyMiddleware({

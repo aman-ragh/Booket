@@ -1,13 +1,19 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState,useContext } from "react";
 import Navbar from "./Navbar"
 import Product from "./Product";
 import axios from "axios";
 import { LocationContext } from "./Contexts/LocationContext";
 import { SearchContext } from "./Contexts/SearchContext";
+import { AccountContext } from "./Contexts/AccountContext";
+import Loader from "./Loader";
+
 function Home() {
+  const [loader,setLoader]=useState(true);
   const [loc, setLoc] = useState("g");
   const [search, setSearch] = useState(null);
   const [products, setProducts] = useState([]);
+
+  
   useEffect(() => {
     axios.get("/productsBackend")
       .then((res) => {
@@ -19,6 +25,12 @@ function Home() {
         console.log(err);
       })
   }, []);
+  setTimeout(() => {
+    setLoader(false);
+  },2000);
+  if(loader){
+    return <Loader/>;
+  }
   return (
     <div>
       <LocationContext.Provider value={{ loc, setLoc }}>

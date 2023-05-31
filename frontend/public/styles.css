@@ -16,31 +16,31 @@ body{
 .location{
     width:14%;
     margin-right:6%;
-    border-radius:5px;
-    padding:0 15px;
+    border-radius:0.31rem;
+    padding:0 0.9375rem;
 }
 .location:focus{
-    outline: 2px solid #7149C6;
+    outline: 0.125rem solid #7149C6;
 }
 .search{
     width:30%;
     margin-right:9%;
-    border-radius: 10px;
-    padding:0 15px;
+    border-radius: 0.625rem;
+    padding:0 0.9375rem;
     
 }
 input[type="search"]::-webkit-search-cancel-button {
     -webkit-appearance: none;
   }
 .search:focus{
-    outline: 3px solid #7149C6;
+    outline: 0.1875rem solid #7149C6;
 }
 .nav{
     margin-top:1%;
-    border-bottom:2px solid #eceef3;
-    padding: 3px   3px 20px 3px  ;
+    border-bottom:0.125rem solid #eceef3;
+    padding: 0.1875rem   0.1875rem 1.25rem 0.1875rem ;
     /* padding:3px; */
-    margin-bottom:25px;
+    margin-bottom:1.5625rem;
     display:flex;
     /* flex-wrap:wrap; */
     align-items:center;
@@ -83,12 +83,12 @@ input[type="search"]::-webkit-search-cancel-button {
 }
 .account img{
   object-fit: cover;
-    width:40px;
-    height: 40px;
+    width:2.5rem;
+    height: 2.5rem;
     border-radius: 50%;
 }
 .account img:hover{
-    outline: 2px solid #7149C6;
+    outline: 0.125rem solid #7149C6;
 }
 
 
@@ -231,6 +231,16 @@ input[type="search"]::-webkit-search-cancel-button {
   
   /* Sign page */
   
+  .container h4{
+    margin:0;
+    font-size:14px;
+    color:#9675F7;
+    margin-left:70%;
+  }
+  .container .name{
+    margin-bottom:20px;
+  }
+  
   
 @import url('https://fonts.googleapis.com/css?family=Montserrat:400,800');
 
@@ -251,7 +261,7 @@ input[type="search"]::-webkit-search-cancel-button {
 
 .container h1 {
 	font-weight: bold;
-	margin: 0;
+	margin: 0 0 15px 0;
 }
 
 .container h2 {
@@ -547,8 +557,9 @@ input[type="search"]::-webkit-search-cancel-button {
 .home-products-container{
   display: flex;
   flex-wrap:wrap;
-  /* justify-content:flex-start; */
-  justify-content:start;
+  justify-content:flex-start;
+  padding: 0 auto;
+  /* justify-content:start; */
   
 }
 
@@ -587,7 +598,54 @@ input[type="search"]::-webkit-search-cancel-button {
   margin:10px;
 }
 .books-container{
+  display:flex;
+  flex-wrap:wrap;
   box-shadow : 0px 2px 4px rgba(0,0,0,0.1);
-  padding:3px;
+  padding:0 auto;
+  justify-content:flex-start;
  
+}
+
+
+
+/* Book page */
+.container .img-container{
+  display:inline-block;
+  width:300px;
+  height:300px;
+  object-fit:cover;
+  
+}
+.book-container{
+  display:flex;
+  align-items: center;
+  justify-content: space-evenly;
+}
+
+.book-container img{
+  width:300px;
+  height:300px;
+  
+}
+.book-description{
+  /* display:flex; */
+  align-items: center;
+  /* justify-content:start; */
+}
+.book-description h1{
+  color:#9675F7;
+  font-weight:700;
+}
+.book-description h3{
+  color:grey;
+  font-weight:300;
+  font-size:20px;
+}
+
+
+
+
+@media screen and (max-width:600px) {
+  body{
+  }
 }
