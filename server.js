@@ -24,7 +24,11 @@ app.use(bodyParser.json());
 app.use(passport.initialize());
 
 
-mongoose.connect(process.env.MY_DB, { useNewUrlParser: true });
+mongoose.connect(process.env.MY_DB, { useNewUrlParser: true }).then(() => {
+    console.log("connected to db");
+}).catch((error) => {
+    console.log("error connecting to db", error);
+});
 
 const userSchema = new mongoose.Schema({
     username: String,
@@ -225,6 +229,6 @@ app.post("/signinBackend", (req, res) => {
 });
 
 
-app.listen(process.env.MY_PORT, (req, res) => {
+app.listen(process.env.PORT || process.env.MY_PORT, (req, res) => {
     console.log("Server stated at port 2000");
 });
