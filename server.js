@@ -2,6 +2,7 @@ require('dotenv').config()
 const express = require("express");
 const app = express();
 const mongoose = require("mongoose");
+const path = require("path");
 const nodemailer=require("nodemailer")
 const bodyParser = require("body-parser");
 const { json } = require("body-parser");
@@ -44,7 +45,15 @@ const userSchema = new mongoose.Schema({
 const User = new mongoose.model("User", userSchema);
 
 
-
+app.use(express.static(path.join(__dirname, "./frontend/build")));
+app.get("*", function (_, res) {
+  res.sendFile(
+    path.join(__dirname, "./frontend/build/index.html"),
+    function (err) {
+      res.status(500).send(err);
+    }
+  );
+});
 passport.use(new JwtStrategy(opts, function (req, jwt_payload, done) {
     User.findOne({ _id: jwt_payload.id }).then(function (user) {
         if (user) {
@@ -148,7 +157,7 @@ app.get("/productsBackend", (req, res) => {
 app.post("/uploadBackend",passport.authenticate('jwt',{session:false}), (req, res) => {
     User.updateOne({ username: req.body.username }, { $push: { product: { bookName: req.body.bookName, price: req.body.price, city: (req.body.city).toLowerCase(), mobileNumber: req.body.mobileNumber, productImageUrl: req.body.productImageUrl } } })
         .then((result) => {
-            console.log("result", result);
+            // console.log("result", result);
             return res.status(200).send({
                 success: true,
                 message: "Product uploaded successfully"
@@ -169,7 +178,7 @@ app.get("/signinCheckBackend", passport.authenticate('jwt', { session: false }),
     });
 });
 app.get("/accountBackend", passport.authenticate('jwt', { session: false }), (req, res) => {
-    console.log("account backend",req.user);
+    // console.log("account backend",req.user);
     return res.status(200).send({
         success: true,
         user:{
