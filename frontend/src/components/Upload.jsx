@@ -5,21 +5,40 @@ import { v4 } from 'uuid';
 import axios from 'axios';
 import { AccountContext } from './Contexts/AccountContext';
 import { useNavigate } from 'react-router-dom';
-
+import Loader from './Loader';
 function Upload() {
     const Navigate=useNavigate();
-    const {account}=useContext(AccountContext);
+    const [loader, setLoader] = useState(true);
+    const {account,setAccount}=useContext(AccountContext);
     const token=localStorage.getItem("token");
+    if(!token){
+        Navigate("/signin");
+    }
     useEffect(()=>{
-        if(!account || !token){
+        if(!token){
             Navigate("/signin");
         }
-    });
+        axios.get("/accountBackend",{headers:{Authorization:token}}).then(res=>{
+            console.log(" res ",res);
+            setAccount(res.data.user);
+        }).catch(err=>{
+            console.error(err);
+            Navigate("/signin");
+        });
+        
+    },[token]);
+    
     const [bookName, setBookName] = useState(null);
     const [price, setPrice] = useState(null);
     const [city, setCity] = useState(null);
     const [mobileNumber, setMobileNumber] = useState(null);
     const [productImageUrl,setProductImageUrl]=useState("https://th.bing.com/th?id=OIP.xwyRkL-vaRx8aUAQP79eXQAAAA&w=219&h=284&c=8&rs=1&qlt=90&o=6&dpr=1.3&pid=3.1&rm=2");
+    setTimeout(() => {
+        setLoader(false);
+    }, 3000);
+    if(loader){
+      return <Loader/>;
+    }
     const uploadImage = (e) => {
         const image=e.target.files[0];
         if (image == null) {
@@ -28,7 +47,6 @@ function Upload() {
         const storageRef = ref(storage, `productImages/${image.name + v4()}`);
         const link=uploadBytes(storageRef, image).then((snapshot) => {
             const l= getDownloadURL(snapshot.ref).then((downloadURL) => {
-                // alert("url is "+downloadURL);
                 console.log('File available at', downloadURL);
                 setProductImageUrl(downloadURL);
                 return downloadURL;
@@ -36,7 +54,6 @@ function Upload() {
                 console.log(error);
                 return -1;
             });
-            // alert("Image uploaded successfully");
             console.log(snapshot);
             return l;
         }).catch((error) => {
@@ -67,7 +84,8 @@ function Upload() {
     }
 
     return (
-        <div className="container">
+        <div className="sign-body">
+        <div className="container upload-container">
             <form method='POST'>
             <div className="image-container">
             
@@ -80,13 +98,13 @@ function Upload() {
             <div className="book-details">
             <br/>
                 <input type="text" onChange={(e) => setBookName(e.target.value)} placeholder="Name"/>
-                <br/>
+                {/* <br/> */}
                 
                 <input type="text" onChange={(e) => setPrice(e.target.value)} placeholder="Price" />
-                <br/>
+                {/* <br/> */}
                 
                 <input type="text" onChange={(e) => setCity(e.target.value)} placeholder="City" />
-                <br/>
+                {/* <br/> */}
                 
                 <input type="text" onChange={(e) => setMobileNumber(e.target.value)} placeholder="Contact No." />
                 <br/>
@@ -96,6 +114,7 @@ function Upload() {
                
             </form>
 
+        </div>
         </div>
     )
 }

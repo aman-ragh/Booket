@@ -149,19 +149,7 @@ function Signup() {
     <div
       className="sign-body"
     >
-      {/* <h1>Signup</h1>
-
-      <form>
-        <label >Profile Pic: </label>
-        <input type="file" placeholder="Profile Pic" onChange={(e) => setProfilePic(e.target.files[0])} />
-        <label >Name:</label>
-        <input type="text" placeholder="Name" onChange={(e) => setName(e.target.value)} />
-        <label >Email:</label>
-        <input type="email" placeholder="Email" onChange={(e) => setUsername(e.target.value)} />
-        <label >Password:</label>
-        <input type="password" placeholder="Password" onChange={(e) => setPassword(e.target.value)} />
-        <button onClick={handleSubmit} type="submit">Signup</button>
-      </form> */}
+      
 
 
 
@@ -169,12 +157,7 @@ function Signup() {
         <div class="form-container sign-up-container">
           <form action="#">
             <h1>Create Account</h1>
-            {/* <div class="social-container"> */}
-            {/* <a href="#" class="social"><i class="fab fa-facebook-f"></i></a>
-              <a href="#" class="social"><i class="fab fa-google-plus-g"></i></a>
-              <a href="#" class="social"><i class="fab fa-linkedin-in"></i></a> */}
-            {/* </div> */}
-            {/* <span>or use your email for registration</span> */}
+            <p className="toSignin" onClick={() => setSignState(false)}>Already registered</p>
             <div className="profile-container">
 
               <label for="profile-input">
@@ -182,7 +165,7 @@ function Signup() {
               </label>
               <input type="file" onChange={uploadImage} placeholder="Profile Pic" id="profile-input" hidden />
             </div>
-            <input type="text" className="name" placeholder="Name" onChange={(e) => setName(e.target.value)} required />
+            <input type="text" className="name signup-name" placeholder="Name" onChange={(e) => setName(e.target.value)} required />
             <input type="email" className="email" placeholder="Email" onChange={(e) => setUsername(e.target.value)} required />
             <h4 onClick={handleSendOtp} >{otpStatus}</h4>
             <input type="text" className="otp" onChange={(e) => setOtp(e.target.value)} placeholder="OTP" required />
@@ -193,13 +176,9 @@ function Signup() {
         </div>
         <div class="form-container sign-in-container">
           <form action="#">
-            <h1>Sign in</h1>
-            {/* <div class="social-container"> */}
-            {/* <a href="#" class="social"><i class="fab fa-facebook-f"></i></a>
-              <a href="#" class="social"><i class="fab fa-google-plus-g"></i></a>
-              <a href="#" class="social"><i class="fab fa-linkedin-in"></i></a> */}
-            {/* </div> */}
-            {/* <span>or use your account</span> */}
+            <h1>Sign In</h1>
+            <p className="toSignup" onClick={() => setSignState(true)} >Not Registered</p>
+            
             <input type="email" className="name" onChange={(e) => setUsername(e.target.value)} placeholder="Email" required />
 
             <input type="password" onChange={(e) => setPassword(e.target.value)} placeholder="Password" required />

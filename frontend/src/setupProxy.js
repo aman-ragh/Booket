@@ -29,46 +29,7 @@ module.exports = function(app) {
       changeOrigin: true,
     })
   );
-  // app.use(
-  //   '/userWelcomeBackend',
-  //   createProxyMiddleware({
-  //     target: 'http://localhost:2000',
-  //     changeOrigin: true,
-  //   })
-  // );
-  // app.use(
-  //   '/adminRouteBackend',
-  //   createProxyMiddleware({
-  //     target: 'http://localhost:2000',
-  //     changeOrigin: true,
-  //   })
-  // );
-  // app.use(
-  //   '/adminLoginBackend',
-  //   createProxyMiddleware({
-  //     target: 'http://localhost:2000',
-  //     changeOrigin: true,
-  //   })
-  // );
   
-  // // Organisation
-  // app.use("/organisationCreateBackend", createProxyMiddleware({
-  //   target: "http://localhost:2000",
-  //   changeOrigin: true,
-  // }));
-  // app.use("/organisationLogin", createProxyMiddleware({
-  //   target: "http://localhost:2000",
-  //   changeOrigin: true,
-  // }));
-  // app.use("/organisationSignup", createProxyMiddleware({
-  //   target: "http://localhost:2000",
-  //   changeOrigin: true,
-  //   }));
-    
-  // app.use("/organisationRoute", createProxyMiddleware({
-  //   target: "http://localhost:2000",
-  //   changeOrigin: true,
-  // }));
   app.use("/uploadBackend", createProxyMiddleware({
     target: "http://localhost:2000",
     changeOrigin: true,

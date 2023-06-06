@@ -124,8 +124,7 @@ app.post("/signupBackend", (req, res) => {
 });
 
 app.get("/productsBackend", (req, res) => {
-    const city = "g";
-    User.find({ "product.city": city.toLowerCase() }).then((result) => {
+    User.find({ }).then((result) => {
         return res.status(200).send({
             success: true,
             message: "Products fetched successfully",

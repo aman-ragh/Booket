@@ -5,7 +5,7 @@ import {useNavigate} from 'react-router-dom';
 import Loader from './Loader';
 import { AccountContext } from './Contexts/AccountContext';
 function Account() {
-  const {account}=useContext(AccountContext);
+  const {account,setAccount}=useContext(AccountContext);
     const token=localStorage.getItem("token");
     const Navigate=useNavigate();
     const [loader, setLoader] = useState(true);
@@ -16,19 +16,20 @@ function Account() {
     // const [myBooks, setMyBooks] = useState([]);
     const products=account.product;
     console.log("account products is ",products);
+    if(!token ){
+      Navigate("/signin");
+  }
     useEffect(() => {
-      if(!token || !account || !account.name){
+      if(!token ){
           Navigate("/signin");
       }
-      // axios.get("/accountBackend",{headers:{Authorization:token}}).then(res=>{
-      //     console.log("account res ",res);
-      //     setMyName(res.data.user.name);
-      //     setMyEmail(res.data.user.username);
-      //     if(res.data.user.profileImageUrl) setMyProfileUrl(res.data.user.profileImageUrl);
-      //     if(res.data.user.product) setMyBooks(res.data.user.product);
-      // }).catch(err=>{
-      //     console.error(err);
-      // });
+      axios.get("/accountBackend",{headers:{Authorization:token}}).then(res=>{
+          // console.log("account res ",res);
+          setAccount(res.data.user);
+      }).catch(err=>{
+          console.error(err);
+          Navigate("/signin");
+      });
   }, []);
 
     setTimeout(() => {

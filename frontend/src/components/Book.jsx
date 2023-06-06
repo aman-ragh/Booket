@@ -4,7 +4,8 @@ function Book(props) {
     const location=useLocation();
     const  book=location.state.book;
   return (
-    <div>
+    <div className="book-in">
+      
     <div className="container book-container">
         <div className="img-container">
             <img src={book.productImageUrl} alt="book" />
@@ -21,6 +22,7 @@ function Book(props) {
         </div>
     </div>
     </div>
+    
   )
 }
 

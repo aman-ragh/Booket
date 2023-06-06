@@ -9,7 +9,7 @@ import Loader from "./Loader";
 
 function Home() {
   const [loader,setLoader]=useState(true);
-  const [loc, setLoc] = useState("g");
+  const [loc, setLoc] = useState("Indore");
   const [search, setSearch] = useState(null);
   const [products, setProducts] = useState([]);
 
@@ -17,7 +17,7 @@ function Home() {
   useEffect(() => {
     axios.get("/productsBackend")
       .then((res) => {
-        console.log(res.data);
+        // console.log(res.data);
         setProducts(res.data.result);
         console.log("products", products);
       })
@@ -36,6 +36,8 @@ function Home() {
       <LocationContext.Provider value={{ loc, setLoc }}>
         <SearchContext.Provider value={{ search, setSearch }}>
           <Navbar />
+          {/* {window.innerWidth} <br/>
+          {window.innerHeight} */}
           <div className="home-products-container">
             
           {products.map((productt) => {
