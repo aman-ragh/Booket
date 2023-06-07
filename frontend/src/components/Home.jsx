@@ -19,7 +19,7 @@ function Home() {
       .then((res) => {
         // console.log(res.data);
         setProducts(res.data.result);
-        console.log("products", products);
+        // console.log("products", products);
       })
       .catch((err) => {
         console.log(err);
