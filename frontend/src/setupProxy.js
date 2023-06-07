@@ -1,47 +1,47 @@
 
 const { createProxyMiddleware } = require('http-proxy-middleware');
-const backendUrl="https://booket-server.onrender.com";
+const backendUrl="http://localhost:2000";
 
 module.exports = function(app) {
   app.use(
-    "/api/sendEmailOtp",
+    "/sendEmailOtp",
     createProxyMiddleware({
       target: backendUrl,
       changeOrigin: true,
     })
   );
   app.use(
-    "/api/signinCheckBackend",
+    "/signinCheckBackend",
     createProxyMiddleware({
       target: backendUrl,
       changeOrigin: true,
     })
   );
   app.use(
-    '/api/accountBackend',
+    '/accountBackend',
     createProxyMiddleware({
       target: backendUrl,
       changeOrigin: true,
     })
   );
   app.use(
-    '/api/signinBackend',
+    '/signinBackend',
     createProxyMiddleware({
       target: backendUrl,
       changeOrigin: true,
     })
   );
   
-  app.use("/api/uploadBackend", createProxyMiddleware({
+  app.use("/uploadBackend", createProxyMiddleware({
     target: backendUrl,
     changeOrigin: true,
     }));
     
-    app.use("/api/signupBackend", createProxyMiddleware({
+    app.use("/signupBackend", createProxyMiddleware({
       target: backendUrl,
       changeOrigin: true,
       }));
-      app.use("/api/productsBackend", createProxyMiddleware({
+      app.use("/productsBackend", createProxyMiddleware({
         target: backendUrl,
         changeOrigin: true,
         }));
