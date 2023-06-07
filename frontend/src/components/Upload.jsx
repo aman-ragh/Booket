@@ -19,7 +19,7 @@ function Upload() {
         if(!token){
             Navigate("/signin");
         }
-        axios.get(backendUrl+"/accountBackend",{headers:{Authorization:token}}).then(res=>{
+        axios.get("/accountBackend",{headers:{Authorization:token}}).then(res=>{
             console.log(" res ",res);
             setAccount(res.data.user);
         }).catch(err=>{
@@ -69,7 +69,7 @@ function Upload() {
         console.log(bookName);
         console.log("imageUrl",productImageUrl);
         const username=account.username;
-        axios.post(backendUrl+"/uploadBackend", { username,bookName, price, city, mobileNumber, productImageUrl },{headers:{Authorization:token}})
+        axios.post("/uploadBackend", { username,bookName, price, city, mobileNumber, productImageUrl },{headers:{Authorization:token}})
             .then((res) => {
                 console.log(res.data);
                 Navigate("/");

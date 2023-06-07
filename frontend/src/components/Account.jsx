@@ -23,7 +23,7 @@ function Account() {
           Navigate("/signin");
       }
       
-      axios.get(backendUrl+"/accountBackend",{headers:{Authorization:token}}).then(res=>{
+      axios.get("/accountBackend",{headers:{Authorization:token}}).then(res=>{
           // console.log("account res ",res);
           setAccount(res.data.user);
       }).catch(err=>{
