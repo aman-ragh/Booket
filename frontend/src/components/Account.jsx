@@ -9,13 +9,11 @@ function Account() {
     const token=localStorage.getItem("token");
     const Navigate=useNavigate();
     const [loader, setLoader] = useState(true);
-      console.log("account is ",account);
     // const [myName, setMyName] = useState("Aman Raghuwanshi");
     // const [myEmail, setMyEmail] = useState("ajlfja@gmail.com");
     // const [myProfileUrl, setMyProfileUrl] = useState("https://images4.alphacoders.com/131/thumbbig-1312296.webp");
     // const [myBooks, setMyBooks] = useState([]);
     const products=account.product;
-    console.log("account products is ",products);
     if(!token ){
       Navigate("/signin");
   }

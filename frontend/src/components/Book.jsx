@@ -1,8 +1,40 @@
-import React from 'react'
+import React,{useState,useEffect,useContext} from 'react'
 import {useLocation} from 'react-router-dom';
+import { AccountContext } from './Contexts/AccountContext';
+import axios from 'axios';
+import {useNavigate} from 'react-router-dom';
+import Loader from './Loader';
 function Book(props) {
     const location=useLocation();
     const  book=location.state.book;
+    const {account,setAccount}=useContext(AccountContext);
+    const token=localStorage.getItem("token");
+    const Navigate=useNavigate();
+    const [loader, setLoader] = useState(true);
+    const products=account.product;
+    console.log("account products is ",products);
+    if(!token ){
+      Navigate("/signin");
+  }
+    useEffect(() => {
+      if(!token ){
+          Navigate("/signin");
+      }
+      axios.get("/accountBackend",{headers:{Authorization:token}}).then(res=>{
+          // console.log("account res ",res);
+          setAccount(res.data.user);
+      }).catch(err=>{
+          console.error(err);
+          Navigate("/signin");
+      });
+  }, []);
+
+    setTimeout(() => {
+        setLoader(false);
+    }, 3000);
+    if(loader){
+      return <Loader/>;
+    }
   return (
     <div className="book-in">
       
