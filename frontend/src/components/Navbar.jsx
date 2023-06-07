@@ -5,6 +5,7 @@ import { SearchContext } from "./Contexts/SearchContext";
 import { AccountContext } from "./Contexts/AccountContext";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import { backendUrl } from "./url";
 function Navbar() {
   const Navigate = useNavigate();
   const { account, setAccount } = useContext(AccountContext);
@@ -22,7 +23,7 @@ function Navbar() {
         if(!token){
             Navigate("/signin");
         }
-        axios.get("/accountBackend",{headers:{Authorization:token}}).then(res=>{
+        axios.get(backendUrl+"/accountBackend",{headers:{Authorization:token}}).then(res=>{
             // console.log(" res ",res);
             setAccount(res.data.user);
         }).catch(err=>{

@@ -1,11 +1,11 @@
-import React, { useEffect, useState } from "react";
-import { NavLink, Outlet, useNavigate } from "react-router-dom";
+import React, {  useState } from "react";
+import {useNavigate } from "react-router-dom";
 import axios from "axios";
 import { storage } from '../firebase'
 import { getDownloadURL, ref, uploadBytes } from 'firebase/storage';
 import { v4 } from 'uuid';
 
-
+import { backendUrl } from "./url";
 function Signup() {
   const Navigate = useNavigate();
   const [name, setName] = useState(null);
@@ -24,11 +24,11 @@ function Signup() {
       alert("Please enter email");
       return;
     }
-    axios.post("/sendEmailOtp", { username }).then((res) => {
+    axios.post(backendUrl+"/sendEmailOtp", { username }).then((res) => {
       console.log(res.data);
       setOtpStatus("Sent");
       setCorrectOtp(res.data.otp);
-      console.log("correctOtp", correctOtp);
+      // console.log("correctOtp", correctOtp);
     }).catch((err) => {
       console.log(err);
       setOtpStatus("Resend OTP");
@@ -110,7 +110,7 @@ function Signup() {
       return;
     }
 
-    axios.post("/signupBackend", { name, username, password, profileImageUrl })
+    axios.post(backendUrl+"/signupBackend", { name, username, password, profileImageUrl })
       .then((res) => {
         console.log(res.data);
         alert("Signup successful  so please SignIn");
@@ -127,7 +127,7 @@ function Signup() {
   }
   const handleSignin = (e) => {
     e.preventDefault();
-    axios.post("/signinBackend", { username, password })
+    axios.post(backendUrl+"/signinBackend", { username, password })
       .then((res) => {
         // console.log(res.data);
         localStorage.clear();

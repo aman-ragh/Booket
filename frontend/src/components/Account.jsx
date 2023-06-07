@@ -4,6 +4,7 @@ import axios from 'axios';
 import {useNavigate} from 'react-router-dom';
 import Loader from './Loader';
 import { AccountContext } from './Contexts/AccountContext';
+import { backendUrl } from './url';
 function Account() {
   const {account,setAccount}=useContext(AccountContext);
     const token=localStorage.getItem("token");
@@ -21,7 +22,8 @@ function Account() {
       if(!token ){
           Navigate("/signin");
       }
-      axios.get("/accountBackend",{headers:{Authorization:token}}).then(res=>{
+      
+      axios.get(backendUrl+"/accountBackend",{headers:{Authorization:token}}).then(res=>{
           // console.log("account res ",res);
           setAccount(res.data.user);
       }).catch(err=>{

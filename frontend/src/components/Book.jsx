@@ -4,6 +4,7 @@ import { AccountContext } from './Contexts/AccountContext';
 import axios from 'axios';
 import {useNavigate} from 'react-router-dom';
 import Loader from './Loader';
+import { backendUrl } from './url';
 function Book(props) {
     const location=useLocation();
     const  book=location.state.book;
@@ -20,7 +21,7 @@ function Book(props) {
       if(!token ){
           Navigate("/signin");
       }
-      axios.get("/accountBackend",{headers:{Authorization:token}}).then(res=>{
+      axios.get(backendUrl+"/accountBackend",{headers:{Authorization:token}}).then(res=>{
           // console.log("account res ",res);
           setAccount(res.data.user);
       }).catch(err=>{

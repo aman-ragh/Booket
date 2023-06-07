@@ -1,12 +1,11 @@
-import React, { useEffect, useState,useContext } from "react";
+import React, { useEffect, useState } from "react";
 import Navbar from "./Navbar"
 import Product from "./Product";
 import axios from "axios";
 import { LocationContext } from "./Contexts/LocationContext";
 import { SearchContext } from "./Contexts/SearchContext";
-import { AccountContext } from "./Contexts/AccountContext";
 import Loader from "./Loader";
-
+import { backendUrl } from "./url";
 function Home() {
   const [loader,setLoader]=useState(true);
   const [loc, setLoc] = useState("Indore");
@@ -15,7 +14,7 @@ function Home() {
 
   
   useEffect(() => {
-    axios.get("/productsBackend")
+    axios.get(backendUrl+"/productsBackend")
       .then((res) => {
         // console.log(res.data);
         setProducts(res.data.result);
