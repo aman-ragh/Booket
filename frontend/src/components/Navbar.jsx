@@ -16,13 +16,8 @@ function Navbar() {
   const { search, setSearch } = useContext(SearchContext);
 
   const token=localStorage.getItem("token");
-    if(!token){
-        Navigate("/signin");
-    }
     useEffect(()=>{
-        if(!token){
-            Navigate("/signin");
-        }
+        
         axios.get(backendUrl+"/accountBackend",{headers:{Authorization:token}}).then(res=>{
             // console.log(" res ",res);
             setAccount(res.data.user);
