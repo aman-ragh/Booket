@@ -1,43 +1,6 @@
 [[redirects]]
-  from = "/sendEmailOtp"
-  to = "https://booket-server.onrender.com/sendEmailOtp"
-  status = 200
-  force = true
-
-[[redirects]]
-  from = "/accountBackend"
-  to = "https://booket-server.onrender.com/accountBackend"
-  status = 200
-  force = true
-
-[[redirects]]
-  from = "/signinBackend"
-  to = "https://booket-server.onrender.com/signinBackend"
-  status = 200
-  force = true
-
-[[redirects]]
-  from = "/signinCheckBackend"
-  to = "https://booket-server.onrender.com/signinCheckBackend"
-  status = 200
-  force = true
-
-[[redirects]]
-  from = "/uploadBackend"
-  to = "https://booket-server.onrender.com/uploadBackend"
-  status = 200
-  force = true
-
-
-[[redirects]]
-  from = "/signupBackend"
-  to = "https://booket-server.onrender.com/signupBackend"
-  status = 200
-  force = true
-
-[[redirects]]
-  from = "/productsBackend"
-  to = "https://booket-server.onrender.com/productsBackend"
+  from = "/api/*"
+  to = "https://booket-server.onrender.com/api/:splat"
   status = 200
   force = true
 

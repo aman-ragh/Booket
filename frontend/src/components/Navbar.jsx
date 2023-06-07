@@ -23,7 +23,7 @@ function Navbar() {
         if(!token){
             Navigate("/signin");
         }
-        axios.get("/accountBackend",{headers:{Authorization:token}}).then(res=>{
+        axios.get("/api/accountBackend",{headers:{Authorization:token}}).then(res=>{
             // console.log(" res ",res);
             setAccount(res.data.user);
         }).catch(err=>{

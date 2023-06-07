@@ -4,44 +4,44 @@ const backendUrl="https://booket-server.onrender.com";
 
 module.exports = function(app) {
   app.use(
-    "/sendEmailOtp",
+    "/api/sendEmailOtp",
     createProxyMiddleware({
       target: backendUrl,
       changeOrigin: true,
     })
   );
   app.use(
-    "/signinCheckBackend",
+    "/api/signinCheckBackend",
     createProxyMiddleware({
       target: backendUrl,
       changeOrigin: true,
     })
   );
   app.use(
-    '/accountBackend',
+    '/api/accountBackend',
     createProxyMiddleware({
       target: backendUrl,
       changeOrigin: true,
     })
   );
   app.use(
-    '/signinBackend',
+    '/api/signinBackend',
     createProxyMiddleware({
       target: backendUrl,
       changeOrigin: true,
     })
   );
   
-  app.use("/uploadBackend", createProxyMiddleware({
+  app.use("/api/uploadBackend", createProxyMiddleware({
     target: backendUrl,
     changeOrigin: true,
     }));
     
-    app.use("/signupBackend", createProxyMiddleware({
+    app.use("/api/signupBackend", createProxyMiddleware({
       target: backendUrl,
       changeOrigin: true,
       }));
-      app.use("/productsBackend", createProxyMiddleware({
+      app.use("/api/productsBackend", createProxyMiddleware({
         target: backendUrl,
         changeOrigin: true,
         }));

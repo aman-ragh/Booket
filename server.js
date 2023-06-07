@@ -16,7 +16,7 @@ var opts = {}
 opts.jwtFromRequest = ExtractJwt.fromAuthHeaderAsBearerToken();
 opts.secretOrKey = mySecret;
 opts.passReqToCallback = true;
-
+const api="/api";
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
@@ -65,7 +65,7 @@ passport.use(new JwtStrategy(opts, function (req, jwt_payload, done) {
 }));
 
 
-app.post("/sendEmailOtp", (req, res) => {
+app.post(api+"/sendEmailOtp", (req, res) => {
     const otp = Math.floor((Math.random()) * 999999) + 111111;
     console.log("email otp is " + otp);
     var transporter = nodemailer.createTransport({
@@ -103,7 +103,7 @@ app.post("/sendEmailOtp", (req, res) => {
     // console.log();
 });
 
-app.post("/signupBackend", (req, res) => {
+app.post(api+"/signupBackend", (req, res) => {
     const user = new User({
         username: req.body.username,
         password: hashSync(req.body.password, 10),
@@ -128,7 +128,7 @@ app.post("/signupBackend", (req, res) => {
     });
 });
 
-app.get("/productsBackend", (req, res) => {
+app.get(api+"/productsBackend", (req, res) => {
     User.find({ }).then((result) => {
         return res.status(200).send({
             success: true,
@@ -150,7 +150,7 @@ app.get("/productsBackend", (req, res) => {
 
 
 
-app.post("/uploadBackend",passport.authenticate('jwt',{session:false}), (req, res) => {
+app.post(api+"/uploadBackend",passport.authenticate('jwt',{session:false}), (req, res) => {
     User.updateOne({ username: req.body.username }, { $push: { product: { bookName: req.body.bookName, price: req.body.price, city: (req.body.city).toLowerCase(), mobileNumber: req.body.mobileNumber, productImageUrl: req.body.productImageUrl } } })
         .then((result) => {
             // console.log("result", result);
@@ -167,13 +167,13 @@ app.post("/uploadBackend",passport.authenticate('jwt',{session:false}), (req, re
         });
 });
 
-app.get("/signinCheckBackend", passport.authenticate('jwt', { session: false }), (req, res) => {
+app.get(api+"/signinCheckBackend", passport.authenticate('jwt', { session: false }), (req, res) => {
     res.status(200).send({
         success: true,
         message: "You are logged in",
     });
 });
-app.get("/accountBackend", passport.authenticate('jwt', { session: false }), (req, res) => {
+app.get(api+"/accountBackend", passport.authenticate('jwt', { session: false }), (req, res) => {
     // console.log("account backend",req.user);
     return res.status(200).send({
         success: true,
@@ -185,7 +185,7 @@ app.get("/accountBackend", passport.authenticate('jwt', { session: false }), (re
         }
     });
 });
-app.post("/signinBackend", (req, res) => {
+app.post(api+"/signinBackend", (req, res) => {
     User.findOne({ username: req.body.username }).then(function (foundUser) {
         if (!foundUser) {
             res.status(401).send({
