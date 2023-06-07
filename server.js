@@ -49,15 +49,7 @@ const userSchema = new mongoose.Schema({
 const User = new mongoose.model("User", userSchema);
 
 
-app.use(express.static(path.join(__dirname, "./frontend/build")));
-app.get("*", function (_, res) {
-  res.sendFile(
-    path.join(__dirname, "./frontend/build/index.html"),
-    function (err) {
-      res.status(500).send(err);
-    }
-  );
-});
+
 passport.use(new JwtStrategy(opts, function (req, jwt_payload, done) {
     User.findOne({ _id: jwt_payload.id }).then(function (user) {
         if (user) {
