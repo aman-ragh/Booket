@@ -24,7 +24,7 @@ function Signup() {
       alert("Please enter email");
       return;
     }
-    axios.post("/sendEmailOtp", { username }).then((res) => {
+    axios.post(backendUrl+"/sendEmailOtp", { username }).then((res) => {
       console.log(res.data);
       setOtpStatus("Sent");
       setCorrectOtp(res.data.otp);
@@ -110,7 +110,7 @@ function Signup() {
       return;
     }
 
-    axios.post("/signupBackend", { name, username, password, profileImageUrl })
+    axios.post(backendUrl+"/signupBackend", { name, username, password, profileImageUrl })
       .then((res) => {
         console.log(res.data);
         alert("Signup successful  so please SignIn");
@@ -127,7 +127,7 @@ function Signup() {
   }
   const handleSignin = (e) => {
     e.preventDefault();
-    axios.post("/signinBackend", { username, password })
+    axios.post(backendUrl+"/signinBackend", { username, password })
       .then((res) => {
         // console.log(res.data);
         localStorage.clear();

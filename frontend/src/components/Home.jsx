@@ -14,7 +14,7 @@ function Home() {
 
   
   useEffect(() => {
-    axios.get("/productsBackend")
+    axios.get(backendUrl+"/productsBackend")
       .then((res) => {
         // console.log(res.data);
         setProducts(res.data.result);
