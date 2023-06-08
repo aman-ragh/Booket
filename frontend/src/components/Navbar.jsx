@@ -59,6 +59,8 @@ function Navbar() {
         </NavLink>
       </div>
     </div>
+    <br/>
+    <input type="search" placeholder="Location" className="location2" value={loc} onChange={function (e) { setLoc(e.target.value); }} />
   </div>
 }
 export default Navbar;
