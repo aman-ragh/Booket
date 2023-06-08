@@ -761,17 +761,20 @@ input[type="search"]::-webkit-search-cancel-button {
   .nav{
     font-size:22px;
   }
-  .nav .location{
-    margin:0 0.5%;
+  .nav .dropdown{
+    margin-left:11%;
   }
   .nav .brand{
     margin:0 0.5%;
   }
   .nav .search{
-    margin:0 0.5%;
+    margin:0 6%;
   }
   .container{
     height:400px ;
+  }
+  .nav .location2{
+    width:36%;
   }
   /* Home page */
   .home-products-container{
@@ -782,6 +785,7 @@ input[type="search"]::-webkit-search-cancel-button {
     justify-content:space-evenly;
     
   }
+  
   .product-container{
     margin:20px 0;
     flex:3;
