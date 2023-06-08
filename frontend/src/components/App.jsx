@@ -18,7 +18,7 @@ function App() {
     <div className="centre">
       <Routes>
        <Route path="/" element={<Home />} />
-        <Route path="/loader" element={<Loader />} />
+        {/* <Route path="/loader" element={<Loader />} /> */}
         <Route path="/upload" element={<Upload />} />
         <Route path="/signin" element={<Signup />} />
         <Route path="/account" element={<Account/>} />

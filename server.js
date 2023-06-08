@@ -68,7 +68,7 @@ passport.use(new JwtStrategy(opts, function (req, jwt_payload, done) {
 
 app.post("/sendEmailOtp", (req, res) => {
     const otp = Math.floor((Math.random()) * 999999) + 111111;
-    console.log("email otp is " + otp);
+    // console.log("email otp is " + otp);
     var transporter = nodemailer.createTransport({
         service: 'gmail',
         auth: {

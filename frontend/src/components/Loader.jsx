@@ -4,15 +4,16 @@ import HashLoader from "react-spinners/HashLoader";
 
 function Loader() {
     const override = {
-        position: "absolute",
-        top: "50%",
-        left: "50%",
+        // position: "absolute",
+        // top: "50%",
+        // left: "50%",
         display: "block",
         // margin: "0 auto",
 
     }
     
     return (
+        <div className="loader">
         <div className="sweet-loading" >
 
             <HashLoader
@@ -22,6 +23,7 @@ function Loader() {
                 aria-label="Loading Spinner"
                 data-testid="loader"
             />
+        </div>
         </div>
     );
 }
