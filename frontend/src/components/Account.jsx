@@ -18,10 +18,7 @@ function Account() {
     if(!token ){
       Navigate("/signin");
   }
-    useEffect(() => {
-      if(!token ){
-          Navigate("/signin");
-      }
+   
       
       axios.get(backendUrl+"/accountBackend",{headers:{Authorization:token}}).then(res=>{
           // console.log("account res ",res);
@@ -30,12 +27,9 @@ function Account() {
           console.error(err);
           Navigate("/signin");
       });
-  }, []);
 
-    setTimeout(() => {
-        setLoader(false);
-    }, 3000);
-    if(loader){
+    
+    if(!account){
       return <Loader/>;
     }
     return (

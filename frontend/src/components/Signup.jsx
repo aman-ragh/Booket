@@ -25,7 +25,7 @@ function Signup() {
       return;
     }
     axios.post(backendUrl+"/sendEmailOtp", { username }).then((res) => {
-      console.log(res.data);
+      // console.log(res.data);
       setOtpStatus("Sent");
       setCorrectOtp(res.data.otp);
       // console.log("correctOtp", correctOtp);
@@ -36,8 +36,8 @@ function Signup() {
   }
   const handleOtpVerification = (e) => {
     e.preventDefault();
-    console.log("otp", otp);
-    console.log("correctOtp", correctOtp);
+    // console.log("otp", otp);
+    // console.log("correctOtp", correctOtp);
     if (otp == null) {
       alert("Please enter otp");
       return;
@@ -58,7 +58,6 @@ function Signup() {
     const storageRef = ref(storage, `profileImages/${profilePic.name + v4()}`);
     const link = uploadBytes(storageRef, profilePic).then((snapshot) => {
       const l = getDownloadURL(snapshot.ref).then((downloadURL) => {
-        // alert("url is " + downloadURL);
         console.log('File available at', downloadURL);
         setUrl(downloadURL);
         return downloadURL;
@@ -66,7 +65,6 @@ function Signup() {
         console.log(error);
         return -1;
       });
-      // alert("profilePic uploaded successfully");
       console.log(snapshot);
       return l;
     }).catch((error) => {
@@ -75,32 +73,11 @@ function Signup() {
     );
     return link;
   }
-  // const handleProfilePic = (e) => {
-  //   console.log(e.target.files[0]);
-  //   setProfilePic(e.target.files[0]);
-  //   // const profileImageUrl =  uploadImage();
-
-  //   // // const profileImageUrl =  uploadImage();
-  //   // // setUrl(profileImageUrl);
-
-  // }
-  // var profileImageUrl = null;
-  // useEffect((e) => {
-  //   if(profilePic!=null){
-  //     const profileImageUrl =  uploadImage();
-  //     console.log(profileImageUrl);
-  //   // setUrl(profileImageUrl);
-  //   // console.log("url",url);
-  //   }
-  // }, [profilePic]);
-
-  // useEffect(() => {
-  // }, [url]);
+ 
 
   const handleSignup = (e) => {
     e.preventDefault();
     const profileImageUrl = url;
-    // console.log("imageUrl", profileImageUrl);
     if (verificationStatus !== "Verified") {
       alert("Please verify your email");
       return;
@@ -112,7 +89,7 @@ function Signup() {
 
     axios.post(backendUrl+"/signupBackend", { name, username, password, profileImageUrl })
       .then((res) => {
-        console.log(res.data);
+        // console.log(res.data);
         alert("Signup successful  so please SignIn");
         Navigate("/");
       })
@@ -132,9 +109,9 @@ function Signup() {
         // console.log(res.data);
         localStorage.clear();
         const token = res.data.token;
-        console.log("sign in token is ",token);
-        console.log("given username is ",username);
-        console.log("username ",res.data.username);
+        // console.log("sign in token is ",token);
+        // console.log("given username is ",username);
+        // console.log("username ",res.data.username);
         localStorage.setItem("token", token);
         alert("Signin successful");
         Navigate("/");
@@ -182,7 +159,6 @@ function Signup() {
             <input type="email" className="name" onChange={(e) => setUsername(e.target.value)} placeholder="Email" required />
 
             <input type="password" onChange={(e) => setPassword(e.target.value)} placeholder="Password" required />
-            {/* <a href="#">Forgot your password?</a> */}
             <button type="submit" onClick={handleSignin}>Sign In</button>
           </form>
         </div>

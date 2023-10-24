@@ -7,50 +7,47 @@ import { SearchContext } from "./Contexts/SearchContext";
 import Loader from "./Loader";
 import { backendUrl } from "./url";
 function Home() {
-  const [loader,setLoader]=useState(true);
+  const [loader, setLoader] = useState(true);
   const [loc, setLoc] = useState("Indore");
   const [search, setSearch] = useState(null);
-  const [products, setProducts] = useState([]);
+  const [products, setProducts] = useState();
+
+
+
+  axios.get(backendUrl + "/productsBackend")
+    .then((res) => {
+      // console.log(res.data);
+      setProducts(res.data.result);
+      // console.log("products", products);
+      
+    })
+    .catch((err) => {
+      console.log(err);
+    });
 
   
-  useEffect(() => {
-    axios.get(backendUrl+"/productsBackend")
-      .then((res) => {
-        // console.log(res.data);
-        setProducts(res.data.result);
-        // console.log("products", products);
-      })
-      .catch((err) => {
-        console.log(err);
-      })
-  }, []);
-  setTimeout(() => {
-    setLoader(false);
-  },2000);
-  if(loader){
-    return <Loader/>;
+  if (!products) {
+    return <Loader />;
   }
   return (
     <div>
       <LocationContext.Provider value={{ loc, setLoc }}>
         <SearchContext.Provider value={{ search, setSearch }}>
           <Navbar />
-          {/* {window.innerWidth} <br/>
-          {window.innerHeight} */}
           <div className="home-products-container">
-            
-          {products.map((productt) => {
-            const items = productt.product;
-            return items.map((item) => {
-              return (((search === null || search === "") && item.city.toLowerCase().includes(loc.toLowerCase())) || item.city.toLowerCase().includes(loc.toLowerCase()) && item.bookName.toLowerCase().includes(search.toLowerCase())) ?
-                (<Product bookName={item.bookName} price={item.price} city={item.city} productImageUrl={item.productImageUrl} mobileNumber={item.mobileNumber}/>) : null;
-            });
-          })
-          }
+
+            {products && products.map((productt) => {
+              const items = productt.product;
+              return items && items.map((item) => {
+                return (((search === null || search === "") && item.city.toLowerCase().includes(loc.toLowerCase())) || (item.city.toLowerCase().includes(loc.toLowerCase()) && item.bookName.toLowerCase().includes(search.toLowerCase()))) ?
+                  (<Product bookName={item.bookName} price={item.price} city={item.city} productImageUrl={item.productImageUrl} mobileNumber={item.mobileNumber} />) : null;
+              });
+            })
+            }
           </div>
-          
+
         </SearchContext.Provider>
-      </LocationContext.Provider>      
+      </LocationContext.Provider>
     </div>
   );
 }

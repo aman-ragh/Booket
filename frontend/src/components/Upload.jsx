@@ -13,12 +13,11 @@ function Upload() {
     const {account,setAccount}=useContext(AccountContext);
     const token=localStorage.getItem("token");
     if(!token){
+        setAccount(null);
         Navigate("/signin");
+        
     }
-    useEffect(()=>{
-        if(!token){
-            Navigate("/signin");
-        }
+   
         axios.get(backendUrl+"/accountBackend",{headers:{Authorization:token}}).then(res=>{
             console.log(" res ",res);
             setAccount(res.data.user);
@@ -27,17 +26,14 @@ function Upload() {
             Navigate("/signin");
         });
         
-    },[token]);
     
     const [bookName, setBookName] = useState(null);
     const [price, setPrice] = useState(null);
     const [city, setCity] = useState(null);
     const [mobileNumber, setMobileNumber] = useState(null);
     const [productImageUrl,setProductImageUrl]=useState("https://th.bing.com/th?id=OIP.xwyRkL-vaRx8aUAQP79eXQAAAA&w=219&h=284&c=8&rs=1&qlt=90&o=6&dpr=1.3&pid=3.1&rm=2");
-    setTimeout(() => {
-        setLoader(false);
-    }, 3000);
-    if(loader){
+    
+    if(!account || !token){
       return <Loader/>;
     }
     const uploadImage = (e) => {
@@ -48,14 +44,14 @@ function Upload() {
         const storageRef = ref(storage, `productImages/${image.name + v4()}`);
         const link=uploadBytes(storageRef, image).then((snapshot) => {
             const l= getDownloadURL(snapshot.ref).then((downloadURL) => {
-                console.log('File available at', downloadURL);
+                // console.log('File available at', downloadURL);
                 setProductImageUrl(downloadURL);
                 return downloadURL;
             }).catch((error) => {
                 console.log(error);
                 return -1;
             });
-            console.log(snapshot);
+            // console.log(snapshot);
             return l;
         }).catch((error) => {
             console.log(error);
@@ -66,12 +62,12 @@ function Upload() {
 
     const handleSubmit = async(e) => {
         e.preventDefault();
-        console.log(bookName);
-        console.log("imageUrl",productImageUrl);
+        // console.log(bookName);
+        // console.log("imageUrl",productImageUrl);
         const username=account.username;
         axios.post(backendUrl+"/uploadBackend", { username,bookName, price, city, mobileNumber, productImageUrl },{headers:{Authorization:token}})
             .then((res) => {
-                console.log(res.data);
+                // console.log(res.data);
                 Navigate("/");
             })
             .catch((err) => {

@@ -134,11 +134,7 @@ app.get("/productsBackend", (req, res) => {
         return res.status(200).send({
             success: true,
             message: "Products fetched successfully",
-            result: result.map((item) => {
-                return {
-                    product: item.product
-                }
-            })
+            result: result.product
         });
     }).catch((error) => {
         return res.status(400).send({
