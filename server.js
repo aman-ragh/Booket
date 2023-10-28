@@ -105,15 +105,9 @@ app.post("/sendEmailOtp", (req, res) => {
 });
 
 app.post("/signupBackend", (req, res) => {
-    const user = new User({
-        username: req.body.username,
-        password: hashSync(req.body.password, 10),
-        name: req.body.name,
-        profileImageUrl: req.body.profileImageUrl
-    });
     const us=req.body.username;
-    User.find({username:us}).then((result)=>{
-        if(result.length>0){
+    User.findOne({username:us}).then((result)=>{
+        if(result){
             return res.status(400).send({
                 success: false,
                 message: "User already exists",
@@ -126,6 +120,13 @@ app.post("/signupBackend", (req, res) => {
             error: error
         });
     });
+    const user = new User({
+        username: req.body.username,
+        password: hashSync(req.body.password, 10),
+        name: req.body.name,
+        profileImageUrl: req.body.profileImageUrl
+    });
+    
     user.save().then((user) => {
         return res.status(200).send({
             success: true,
