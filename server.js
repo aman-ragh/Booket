@@ -111,6 +111,21 @@ app.post("/signupBackend", (req, res) => {
         name: req.body.name,
         profileImageUrl: req.body.profileImageUrl
     });
+    const us=req.body.username;
+    User.find({username:us}).then((result)=>{
+        if(result.length>0){
+            return res.status(400).send({
+                success: false,
+                message: "User already exists",
+            });
+        }
+    }).catch((error)=>{
+        return res.status(400).send({
+            success: false,
+            message: "Unexpected error, retry",
+            error: error
+        });
+    });
     user.save().then((user) => {
         return res.status(200).send({
             success: true,

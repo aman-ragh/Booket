@@ -95,7 +95,7 @@ function Signup() {
       })
       .catch((err) => {
         console.log(err);
-        alert("Retry Signup");
+        alert(err.data.message);
         setSignState(true);
         
         // Navigate("/signup");
