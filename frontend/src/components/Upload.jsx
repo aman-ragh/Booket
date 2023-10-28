@@ -31,7 +31,7 @@ function Upload() {
     const [price, setPrice] = useState(null);
     const [city, setCity] = useState(null);
     const [mobileNumber, setMobileNumber] = useState(null);
-    const [productImageUrl,setProductImageUrl]=useState("https://th.bing.com/th?id=OIP.xwyRkL-vaRx8aUAQP79eXQAAAA&w=219&h=284&c=8&rs=1&qlt=90&o=6&dpr=1.3&pid=3.1&rm=2");
+    const [productImageUrl,setProductImageUrl]=useState("https://firebasestorage.googleapis.com/v0/b/booket-25151.appspot.com/o/productImages%2F812eE1lO0dL._AC_UL254_SR254%2C254_.jpg22e9f37f-7580-4a72-8d9f-fa84df263707?alt=media&token=b5654c77-2b67-44b8-9740-7c121bc49f42");
     
     if(!account || !token){
       return <Loader/>;

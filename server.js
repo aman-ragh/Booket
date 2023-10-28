@@ -21,7 +21,18 @@ const api="/api";
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(cors());
-
+// app.use(
+//     cors({
+//       origin: "http://localhost:3000",
+//       methods: "GET, POST, PATCH, DELETE",
+//       credentials: true,
+//       cookie: {
+//         expires: 24 * 60 * 60 * 1000,
+//         httpOnly: false,
+//       },
+//     })
+//   );
+  
 app.use(passport.initialize());
 
 
@@ -107,6 +118,7 @@ app.post("/sendEmailOtp", (req, res) => {
 app.post("/signupBackend", (req, res) => {
     const us=req.body.username;
     User.findOne({username:us}).then((result)=>{
+        console.log(result);
         if(result){
             return res.status(400).send({
                 success: false,
@@ -146,11 +158,12 @@ app.post("/signupBackend", (req, res) => {
 });
 
 app.get("/productsBackend", (req, res) => {
-    User.find({ }).then((result) => {
+    User.find({}).then((result) => {
         return res.status(200).send({
             success: true,
-            message: "Products fetched successfully",
-            result: result.product
+            result: result,
+            message: "Products fetched successfully"
+            
         });
     }).catch((error) => {
         return res.status(400).send({

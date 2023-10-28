@@ -18,15 +18,17 @@ function Home() {
     .then((res) => {
       // console.log(res.data);
       setProducts(res.data.result);
+      setLoader(false);
       // console.log("products", products);
       
     })
     .catch((err) => {
       console.log(err);
+      setLoader(false);
     });
-
+    // console.log("products", products[0][0].bookName);
   
-  if (!products) {
+  if (loader) {
     return <Loader />;
   }
   return (

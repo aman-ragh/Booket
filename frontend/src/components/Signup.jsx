@@ -95,7 +95,7 @@ function Signup() {
       })
       .catch((err) => {
         console.log(err);
-        alert(err.data.message);
+        alert(err.response.data.message);
         setSignState(true);
         
         // Navigate("/signup");

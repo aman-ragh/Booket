@@ -24,15 +24,14 @@ function Book(props) {
       axios.get(backendUrl+"/accountBackend",{headers:{Authorization:token}}).then(res=>{
           // console.log("account res ",res);
           setAccount(res.data.user);
+          setLoader(false);
       }).catch(err=>{
           console.error(err);
+          setLoader(false);
           Navigate("/signin");
       });
   }, []);
 
-    setTimeout(() => {
-        setLoader(false);
-    }, 3000);
     if(loader){
       return <Loader/>;
     }
