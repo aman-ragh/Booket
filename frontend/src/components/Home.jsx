@@ -12,7 +12,9 @@ function Home() {
   const [search, setSearch] = useState(null);
   const [products, setProducts] = useState();
 
-
+  setTimeout(() => {
+    setLoader(false);
+  }, 2000);
 
   axios.get(backendUrl + "/productsBackend")
     .then((res) => {
@@ -27,6 +29,7 @@ function Home() {
       setLoader(false);
     });
     // console.log("products", products[0][0].bookName);
+    
   
   if (loader) {
     return <Loader />;

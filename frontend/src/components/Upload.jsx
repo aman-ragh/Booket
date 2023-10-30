@@ -17,10 +17,12 @@ function Upload() {
         Navigate("/signin");
         
     }
+    
    
         axios.get(backendUrl+"/accountBackend",{headers:{Authorization:token}}).then(res=>{
             console.log(" res ",res);
             setAccount(res.data.user);
+            setLoader(false)
         }).catch(err=>{
             console.error(err);
             Navigate("/signin");
@@ -32,10 +34,14 @@ function Upload() {
     const [city, setCity] = useState(null);
     const [mobileNumber, setMobileNumber] = useState(null);
     const [productImageUrl,setProductImageUrl]=useState("https://firebasestorage.googleapis.com/v0/b/booket-25151.appspot.com/o/productImages%2F812eE1lO0dL._AC_UL254_SR254%2C254_.jpg22e9f37f-7580-4a72-8d9f-fa84df263707?alt=media&token=b5654c77-2b67-44b8-9740-7c121bc49f42");
-    
-    if(!account || !token){
+    setTimeout(() => {
+        setLoader(false);
+    }, 2000);
+    if(loader){
       return <Loader/>;
     }
+    
+        
     const uploadImage = (e) => {
         const image=e.target.files[0];
         if (image == null) {
@@ -44,7 +50,7 @@ function Upload() {
         const storageRef = ref(storage, `productImages/${image.name + v4()}`);
         const link=uploadBytes(storageRef, image).then((snapshot) => {
             const l= getDownloadURL(snapshot.ref).then((downloadURL) => {
-                // console.log('File available at', downloadURL);
+                console.log('File available at', downloadURL);
                 setProductImageUrl(downloadURL);
                 return downloadURL;
             }).catch((error) => {
@@ -63,11 +69,11 @@ function Upload() {
     const handleSubmit = async(e) => {
         e.preventDefault();
         // console.log(bookName);
-        // console.log("imageUrl",productImageUrl);
+        console.log("imageUrl",productImageUrl);
         const username=account.username;
         axios.post(backendUrl+"/uploadBackend", { username,bookName, price, city, mobileNumber, productImageUrl },{headers:{Authorization:token}})
             .then((res) => {
-                // console.log(res.data);
+                console.log(res.data);
                 Navigate("/");
             })
             .catch((err) => {

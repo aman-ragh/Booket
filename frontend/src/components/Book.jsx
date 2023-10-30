@@ -17,6 +17,16 @@ function Book(props) {
     if(!token ){
       Navigate("/signin");
   }
+  // if(props.isLogin || book.isLogin){
+  //   console.log("isLogin is true");
+  // }
+  console.log("props ",props);
+  console.log("book ",book);
+  console.log("user_id : ",book.user_id);
+  console.log("product_id : ",book.product_id);
+  setTimeout(() => {
+    setLoader(false);
+  }, 2000);
     useEffect(() => {
       if(!token ){
           Navigate("/signin");
@@ -32,14 +42,35 @@ function Book(props) {
       });
   }, []);
 
+  function deleteBook(){
+    //  console.log("delete book");
+     if(!book.user_id){
+      alert("Please login to delete book");
+      return;
+     }
+    axios.post(backendUrl+"/deleteBook",{user_id:book.user_id,product_id:book.product_id},{headers:{Authorization:token}}).then(res=>{
+      // console.log("delete res ",res);
+      Navigate("/");
+    }).catch(err=>{
+      console.error(err);
+      alert("Error in deleting book");
+    });
+  }
     if(loader){
       return <Loader/>;
     }
+    // console.log("mobile: ",book.mobileNumber);
   return (
     <div className="book-in">
       
     <div className="container book-container">
+    {book.isLogin===true?
+              <img onClick={deleteBook} src='https://firebasestorage.googleapis.com/v0/b/booket-25151.appspot.com/o/profileImages%2Ftrash.png?alt=media&token=9a6ddbe5-4fd7-4b34-bafc-0d12c87da5b1' alt="delete" className="deleteBook"
+                style={{cursor:"pointer",width:"40px",height:"auto",float:"right",zIndex:"1000",position:"absolute",top:"25px",right:"25px"}}
+              />
+            :null}
         <div className="img-container">
+            
             <img src={book.productImageUrl} alt="book" />
         </div>
         <div className="book-description">

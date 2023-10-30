@@ -200,16 +200,34 @@ app.get("/signinCheckBackend", passport.authenticate('jwt', { session: false }),
     });
 });
 app.get("/accountBackend", passport.authenticate('jwt', { session: false }), (req, res) => {
-    // console.log("account backend",req.user);
     return res.status(200).send({
         success: true,
         user:{
+            user_id:req.user._id,
             profileImageUrl:req.user.profileImageUrl,
             username:req.user.username,
             name:req.user.name,
             product:req.user.product
         }
     });
+});
+
+app.post("/deleteBook", passport.authenticate('jwt', { session: false }), (req, res) => {
+    // console.log("for deletion");
+    User.updateOne({ _id: req.body.user_id }, { $pull: { product: { _id: req.body.product_id } } })
+        .then((result) => {
+            // console.log("delete result", result);
+            return res.status(200).send({
+                success: true,
+                message: "Product deleted successfully"
+            });
+        }).catch((error) => {
+            console.log("error", error);
+            return res.status(400).send({
+                success: false,
+                message: "Product not deleted"
+            });
+        });
 });
 app.post("/signinBackend", (req, res) => {
     User.findOne({ username: req.body.username }).then(function (foundUser) {
