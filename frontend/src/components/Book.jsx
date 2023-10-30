@@ -77,7 +77,7 @@ function Book(props) {
         <h1>₹ {book.price}</h1>
         <h3>City :</h3>
         <h1>{book.city}</h1>
-        <h3>Contact No. :</h3>
+        <h3>Contact detail :</h3>
         <h1>{book.mobileNumber}</h1>
         </div>
     </div>

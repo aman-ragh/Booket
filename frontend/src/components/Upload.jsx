@@ -109,7 +109,7 @@ function Upload() {
                 <input type="text" onChange={(e) => setCity(e.target.value)} placeholder="City" />
                 {/* <br/> */}
                 
-                <input type="text" onChange={(e) => setMobileNumber(e.target.value)} placeholder="Contact No." />
+                <input type="text" onChange={(e) => setMobileNumber(e.target.value)} placeholder="Contact detail" />
                 <br/>
                 
                 <button onClick={handleSubmit} type="submit">Submit</button>
