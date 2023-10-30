@@ -44,13 +44,10 @@ function Book(props) {
 
   function deleteBook(){
     //  console.log("delete book");
-     if(!book.user_id){
-      alert("Please login to delete book");
-      return;
-     }
+     
     axios.post(backendUrl+"/deleteBook",{user_id:book.user_id,product_id:book.product_id},{headers:{Authorization:token}}).then(res=>{
       // console.log("delete res ",res);
-      Navigate("/");
+      Navigate("/account");
     }).catch(err=>{
       console.error(err);
       alert("Error in deleting book");
